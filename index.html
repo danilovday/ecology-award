@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="ru" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="assets/icons/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16.png">
+  <title>Экобизнес - премия в области экологии</title>
+  <meta name="description" content="Демонстрационная верстка страницы экопремии (чистая фронтенд-рыба без брендов и контента)." />
+  <!-- Tailwind CDN для прототипа. На проде — собрать локально. -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#edfff7', 100: '#d6ffef', 200: '#a8f7d5', 300: '#77e9bc',
+              400: '#42d49e', 500: '#18b780', 600: '#0a996b', 700: '#0b7b58',
+              800: '#0e6048', 900: '#0f4e3c'
+            }
+          },
+          fontFamily: {
+            sans: ["Inter", "system-ui", "-apple-system", "Segoe UI", "Roboto", "Ubuntu", "Cantarell", "Noto Sans", "Helvetica Neue", "Arial", "sans-serif"],
+          },
+          boxShadow: {
+            soft: '0 8px 30px rgba(0,0,0,0.08)'
+          },
+          backgroundImage: {
+            'hero-grid': 'radial-gradient(800px 400px at 0% 0%, rgba(24,183,128,0.15), transparent 60%), radial-gradient(600px 300px at 100% 20%, rgba(66,212,158,0.12), transparent 60%), radial-gradient(700px 400px at 50% 100%, rgba(10,153,107,0.12), transparent 60%)'
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* Плавная анимация открытия аккордеона */
+    .accordion-content { height: 0; overflow: hidden; transition: height .28s ease; }
+    .accordion-open .accordion-content { height: var(--accordion-target, 0px); }
+    /* Маска для градиентных заглушек */
+    .img-skeleton { background: linear-gradient(90deg, #e5e7eb, #f3f4f6 40%, #e5e7eb 80%); background-size: 200% 100%; animation: shine 1.4s linear infinite; }
+    @keyframes shine { from { background-position: 200% 0 } to { background-position: -200% 0 } }
+    .glass { backdrop-filter: blur(8px); background: rgba(255,255,255,0.7); }
+    #header.scrolled { background: rgba(255, 255, 255, 0.9); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); backdrop-filter: blur(8px); }
+  </style>
+</head>
+<body class="antialiased text-slate-800">
+  <!-- Header -->
+  <header id="header" class="sticky top-0 z-40 transition-all">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <a href="#top" class="flex items-center gap-2 font-semibold text-slate-900">
+          <span class="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-primary-600 text-white">E</span>
+          <span>Экобизнес</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+          <button class="hover:text-primary-600 applyBtn">Подать заявку</button>
+          <a href="#tracks" class="hover:text-primary-600">Номинации</a>
+          <a href="#why" class="hover:text-primary-600">Зачем участвовать</a>
+          <a href="#stages" class="hover:text-primary-600">Этапы</a>
+          <a href="#faq" class="hover:text-primary-600">Вопросы</a>
+                    <a href="#winners" class="hover:text-primary-600">Прошлые победители</a>
+          <a href="#contacts" class="hover:text-primary-600">Контакты</a>
+        </nav>
+        <div class="flex items-center gap-2">
+          <button type="button" class="hidden sm:inline-flex items-center gap-2 rounded-full bg-primary-600 px-4 py-2 text-white shadow-soft hover:bg-primary-700 applyBtn">Подать заявку</button>
+          <button id="menuBtn" class="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200"><span class="sr-only">Меню</span>☰</button>
+        </div>
+      </div>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="md:hidden hidden border-t border-slate-200 bg-white">
+      <div class="mx-auto max-w-7xl px-4 py-3 grid grid-cols-2 gap-3 text-sm">
+        <button class="py-2 applyBtn text-left w-full">Подать заявку</button>
+        <a href="#tracks" class="py-2">Номинации</a>
+        <a href="#why" class="py-2">Зачем участвовать</a>
+        <a href="#stages" class="py-2">Этапы</a>
+        <a href="#faq" class="py-2">Вопросы</a>
+                <a href="#winners" class="hover:text-primary-600">Прошлые победители</a>
+        <a href="#contacts" class="py-2">Контакты</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="top" class="relative isolate bg-hero-grid">
+    <div class="absolute inset-0 -z-10 bg-gradient-to-b from-white to-emerald-50/60"></div>
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-28">
+      <div class="grid lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <h1 class="text-3xl sm:text-5xl/tight font-extrabold text-slate-900">Премия Экобизнес: Зеленые решения года</h1>
+          <p class="mt-4 text-lg text-slate-600">«Премия Экобизнес: Зеленые решения года — платформа для компаний, внедряющих реальные экологические решения, учитывающие людей и планету. Мы отмечаем лучшие кейсы и помогаем масштабировать устойчивый бизнес».
+          Наша премия в сфере экологии проводится уже 5 лет — за это время она стала ключевой платформой для выявления и поддержки экологических инициатив. Ежегодно конкурс открывает новые проекты в областях сохранения биоразнообразия, устойчивой энергетики, управления отходами и очистки воды и воздуха. За пять сезонов лауреаты внедрили практические решения в муниципалитетах и бизнесе, снизив выбросы и объёмы отходов, а также повысив эффективность природопользования
+          </p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <button type="button" class="inline-flex items-center gap-2 rounded-full bg-primary-600 px-5 py-3 text-white shadow-soft hover:bg-primary-700 applyBtn">Подать заявку</button>
+            <a href="#why" class="inline-flex items-center gap-2 rounded-full border border-slate-300 px-5 py-3 hover:border-slate-400">Подробнее</a>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="aspect-[4/3] w-full rounded-3xl bg-white p-2 shadow-soft">
+            <div class="h-full w-full rounded-2xl img-skeleton">
+              <img src="assets/img/hero.jpg" alt="Главное изображение"
+              class="h-full w-full rounded-2xl object-cover">
+            </div>
+          </div>
+          <div class="absolute -bottom-6 -left-6 hidden sm:block rounded-2xl bg-white p-3 shadow-soft">
+            <div class="h-24 w-40 rounded-xl img-skeleton">
+              <img src="assets/img/hero.jpg" alt="Описывающий текст"
+              class="h-full w-full rounded-2xl object-cover">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tabs: Tracks -->
+  <section id="tracks" class="py-16 sm:py-24">
+<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+<h2 class="text-2xl sm:text-3xl font-bold">Номинации</h2>
+<div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+<article class="rounded-3xl border border-slate-200 p-6 lg:p-8 bg-white shadow-soft">
+<h3 class="text-xl font-semibold">Технология года в экологической инженерии</h3>
+<p class="mt-3 text-slate-600">Номинация для команд и компаний, превращающих инженерную мысль в реальный вклад в природу.</p>
+</article>
+<article class="rounded-3xl border border-slate-200 p-6 lg:p-8 bg-white shadow-soft">
+<h3 class="text-xl font-semibold">Зеленый бизнес-прорыв</h3>
+<p class="mt-3 text-slate-600">Номинация для компаний и стартапов, где устойчивость — не тренд, а стратегия. В фокусе — циркулярные модели, экологичный дизайн и прозрачные цепочки поставок, доказавшие сокращение экологического следа при коммерчески жизнеспособной модели.</p>
+</article>
+<article class="rounded-3xl border border-slate-200 p-6 lg:p-8 bg-white shadow-soft">
+<h3 class="text-xl font-semibold">Экологический вклад общества</h3>
+<p class="mt-3 text-slate-600">Номинация для инициатив, которые пробуждают заботу о природе и восстанавливают экосистемы через вовлечение людей: образовательные программы, волонтёрские акции и просветительские кампании.</p>
+</article>
+</div>
+</div>
+</section>
+
+  <!-- Why participate -->
+  <section id="why" class="py-16 sm:py-24 bg-slate-50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl sm:text-3xl font-bold">Зачем участвовать</h2>
+      <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="rounded-3xl bg-white p-6 shadow-soft">
+          <div class="text-3xl">🧭</div>
+          <h3 class="mt-3 font-semibold">Очные мероприятия</h3>
+          <p class="mt-2 text-slate-600">Выступления, форумы и нетворкинг для активных участников.</p>
+        </div>
+        <div class="rounded-3xl bg-white p-6 shadow-soft">
+          <div class="text-3xl">💶</div>
+          <h3 class="mt-3 font-semibold">Грантовая поддержка</h3>
+          <p class="mt-2 text-slate-600">Денежные призы и ресурсная поддержка в ряде номинаций.</p>
+        </div>
+        <div class="rounded-3xl bg-white p-6 shadow-soft">
+          <div class="text-3xl">📣</div>
+          <h3 class="mt-3 font-semibold">PR и узнаваемость</h3>
+          <p class="mt-2 text-slate-600">Публикации о лучших проектах в медиа и соцсетях.</p>
+        </div>
+        <div class="rounded-3xl bg-white p-6 shadow-soft">
+          <div class="text-3xl">🌱</div>
+          <h3 class="mt-3 font-semibold">Сообщество</h3>
+          <p class="mt-2 text-slate-600">Интеграция в экосообщество и продолжение поддержки.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stages timeline -->
+  <section id="stages" class="py-16 sm:py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-10">
+        <div>
+          <h2 class="text-2xl sm:text-3xl font-bold">Этапы конкурса</h2>
+          <ol class="mt-6 space-y-4">
+            <li class="rounded-2xl border border-slate-200 p-4">
+              <div class="text-sm text-slate-500">1 мар — 31 мая</div>
+              <div class="font-semibold">Подача заявок — рассказ о проекте, данные и материалы</div>
+            </li>
+            <li class="rounded-2xl border border-slate-200 p-4">
+              <div class="text-sm text-slate-500">июнь- июль</div>
+              <div class="font-semibold">Экспертный отбор — оценка жюри по объективным критериям</div>
+            </li>
+            <li class="rounded-2xl border border-slate-200 p-4">
+              <div class="text-sm text-slate-500">август</div>
+              <div class="font-semibold">Публичная защита/онлайн голосование</div>
+            </li>
+            <li class="rounded-2xl border border-slate-200 p-4">
+              <div class="text-sm text-slate-500">сентябрь</div>
+              <div class="font-semibold">Церемония награждения — вручение сертификатов</div>
+            </li>
+          </ol>
+        </div>
+        <div class="lg:pl-10">
+          <div class="aspect-[4/3] w-full rounded-3xl bg-white p-2 shadow-soft">
+            <div class="h-full w-full rounded-2xl img-skeleton">
+              <img src="assets/img/hero.jpg" alt="Описывающий текст"
+              class="h-full w-full rounded-2xl object-cover">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-16 sm:py-24 bg-slate-50">
+    <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl sm:text-3xl font-bold">Основные вопросы</h2>
+      <div class="mt-8 space-y-3">
+        <!-- FAQ item -->
+        <div class="accordion rounded-2xl bg-white p-4 shadow-soft">
+          <button class="accordion-btn w-full text-left">
+            <div class="flex items-center justify-between">
+              <span class="font-semibold">Кто может участвовать?</span>
+              <span>▾</span>
+            </div>
+          </button>
+          <div class="accordion-content">
+            <div class="pt-3 text-slate-600">Физические и юридические лица, региональные и муниципальные команды — подробные критерии определяются положением премии.</div>
+          </div>
+        </div>
+        <div class="accordion rounded-2xl bg-white p-4 shadow-soft">
+          <button class="accordion-btn w-full text-left">
+            <div class="flex items-center justify-between">
+              <span class="font-semibold">Что дает участие?</span>
+              <span>▾</span>
+            </div>
+          </button>
+          <div class="accordion-content">
+            <div class="pt-3 text-slate-600">Экспертиза проектов, обратная связь, обмен опытом и шанс заявить о себе широкой аудитории.</div>
+          </div>
+        </div>
+        <div class="accordion rounded-2xl bg-white p-4 shadow-soft">
+          <button class="accordion-btn w-full text-left">
+            <div class="flex items-center justify-between">
+              <span class="font-semibold">Как проходит отбор?</span>
+              <span>▾</span>
+            </div>
+          </button>
+          <div class="accordion-content">
+            <div class="pt-3 text-slate-600">После заявочной кампании формируется шорт‑лист, затем жюри оценивает проекты по утвержденным критериям.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Jury -->
+  <!-- секция Жюри удалена по запросу -->
+
+  <!-- News -->
+  <section id="winners" class="py-16 sm:py-24 bg-slate-50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex items-end justify-between">
+        <h2 class="text-2xl sm:text-3xl font-bold">Наши прошлые победители</h2>
+        <button id="loadMoreWinners" class="text-sm text-primary-700 hover:underline">Загрузить ещё</button>
+      </div>
+      <div id="winnersGrid" class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <template id="winnerCardTemplate">
+          <article class="rounded-3xl bg-white shadow-soft overflow-hidden">
+            <div class="aspect-video img-skeleton"></div>
+            <div class="p-4">
+              <div class="text-xs text-slate-500">2024</div>
+              <h3 class="mt-1 font-semibold">Название проекта</h3>
+              <p class="mt-1 text-sm text-slate-600 line-clamp-3">Короткое описание победителя.</p>
+            </div>
+          </article>
+        </template>
+      </div>
+    </div>
+  </section>
+
+  <!-- Partners -->
+  <!-- секция Партнёры удалена по запросу -->
+
+  <!-- Contacts -->
+  <section id="contacts" class="py-16 sm:py-24 bg-slate-900 text-slate-50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <h2 class="text-2xl sm:text-3xl font-bold">Контакты</h2>
+          <p class="mt-2 text-slate-300">По вопросам участия и партнёрства.</p>
+          <div class="mt-6 space-y-2">
+            <a href="mailto:contact@example.com" class="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 hover:bg-white/15">contact@example.com</a>
+            <div class="text-sm text-slate-400">Телеграм • ВКонтакте • Почта</div>
+          </div>
+        </div>
+        <div class="rounded-3xl bg-white/5 p-2">
+          <div class="h-72 w-full rounded-2xl img-skeleton"></div>
+        </div>
+      </div>
+      <div class="mt-10 border-t border-white/10 pt-6 text-sm text-slate-400">© 2025 Экодвижение</div>
+    </div>
+  </section>
+
+  <!-- Apply anchor -->
+  <div id="apply" class="fixed bottom-5 right-5">
+    <button type="button" class="inline-flex items-center gap-2 rounded-full bg-primary-600 px-5 py-3 text-white shadow-soft hover:bg-primary-700 applyBtn">Оставить заявку</button>
+  </div>
+
+  <script>
+    // sticky header bg on scroll
+    const header = document.getElementById('header');
+    const onScroll = () => {
+      if (window.scrollY > 8) header.classList.add('scrolled');
+      else header.classList.remove('scrolled');
+    };
+    document.addEventListener('scroll', onScroll);
+
+    // mobile menu
+    document.getElementById('menuBtn').addEventListener('click', () => {
+      document.getElementById('mobileMenu').classList.toggle('hidden');
+    });
+
+   
+    // (секция Жюри удалена)
+
+    // Winners populate (6 + load more)
+    const winnersGrid = document.getElementById('winnersGrid');
+    if (winnersGrid) {
+      const winnersTpl = document.getElementById('winnerCardTemplate');
+      const addWinners = (count=6) => { for (let i=0;i<count;i++){ winnersGrid.append(winnersTpl.content.cloneNode(true)); } };
+      addWinners();
+      const loadMoreWinners = document.getElementById('loadMoreWinners');
+      if (loadMoreWinners) loadMoreWinners.addEventListener('click', () => addWinners(3));
+    }
+
+    // Accordion
+    const accordions = document.querySelectorAll('.accordion');
+    accordions.forEach(item => {
+      const btn = item.querySelector('.accordion-btn');
+      const content = item.querySelector('.accordion-content');
+      const syncHeight = () => {
+        const inner = content.firstElementChild;
+        if (!inner) return;
+        content.style.setProperty('--accordion-target', inner.scrollHeight + 'px');
+      };
+      syncHeight();
+      btn.addEventListener('click', () => { item.classList.toggle('accordion-open'); syncHeight(); });
+      window.addEventListener('resize', syncHeight);
+    });
+  </script>
+  <!-- Apply Modal -->
+  <div id="applyModal" class="fixed inset-0 z-50 hidden">
+    <div class="absolute inset-0 bg-black/50" data-close="true"></div>
+    <div class="relative mx-auto my-10 w-[92%] max-w-lg rounded-2xl bg-white p-6 shadow-soft">
+      <div class="flex items-center justify-between">
+        <h3 class="text-xl font-semibold">Подать заявку</h3>
+        <button id="closeApplyModal" class="h-9 w-9 rounded-xl border border-slate-200">✕</button>
+      </div>
+      <form id="applyForm" class="mt-4 space-y-3">
+        <div>
+          <label class="text-sm text-slate-600">Email</label>
+          <input type="email" name="email" required class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-300" placeholder="name@example.com" />
+        </div>
+        <div>
+          <label class="text-sm text-slate-600">Телефон</label>
+          <input type="tel" name="phone" required class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-300" placeholder="+7 (___) ___-__-__" />
+        </div>
+        <div>
+          <label class="text-sm text-slate-600">Организация</label>
+          <input type="text" name="org" required class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-300" placeholder="Название организации" />
+        </div>
+        <div>
+          <label class="text-sm text-slate-600">Имя</label>
+          <input type="text" name="name" required class="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-300" placeholder="Как к вам обращаться" />
+        </div>
+        <button type="submit" class="mt-2 inline-flex w-full items-center justify-center rounded-full bg-primary-600 px-5 py-3 text-white shadow-soft hover:bg-primary-700">Подать заявку</button>
+        <p class="text-xs text-slate-500">Демо-форма: данные никуда не отправляются. Бэкенд подключим позже.</p>
+      </form>
+    </div>
+  </div>
+
+<script>
+  // Apply Modal logic (event delegation; works reliably)
+  (function(){
+    const open = () => { const m = document.getElementById('applyModal'); if (m) m.classList.remove('hidden'); };
+    const close = () => { const m = document.getElementById('applyModal'); if (m) m.classList.add('hidden'); };
+
+    // open on any .applyBtn click
+    document.addEventListener('click', (e) => {
+      const t = e.target;
+      if (t && t.classList && t.classList.contains('applyBtn')) { e.preventDefault(); open(); }
+      if (t && (t.id === 'closeApplyModal' || t.getAttribute('data-close') === 'true')) close();
+    });
+
+    // close on Esc
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+
+    // demo submit handler
+    document.addEventListener('submit', (e) => {
+      const form = e.target && e.target.id === 'applyForm' ? e.target : null;
+      if (!form) return;
+      e.preventDefault();
+      alert('Заявка отправлена (демо). Бэкенд подключим позже.');
+      form.reset();
+      close();
+    });
+  })();
+</script>
+</body>
+</html>
