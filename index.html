@@ -6,7 +6,7 @@
   <link rel="icon" href="assets/icons/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16.png">
-  <title>Экобизнес - премия в области экологии</title>
+  <title>EcoBusiness - премия в области экологии</title>
   <meta name="description" content="Демонстрационная верстка страницы экопремии (чистая фронтенд-рыба без брендов и контента)." />
   <!-- Tailwind CDN для прототипа. На проде — собрать локально. -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -42,6 +42,35 @@
     @keyframes shine { from { background-position: 200% 0 } to { background-position: -200% 0 } }
     .glass { backdrop-filter: blur(8px); background: rgba(255,255,255,0.7); }
     #header.scrolled { background: rgba(255, 255, 255, 0.9); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); backdrop-filter: blur(8px); }
+    .accordion .chev { transform: rotate(0deg); }
+    .accordion-open .chev { transform: rotate(180deg); }
+    :root{
+    --btn-font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+    --primary-600: #6e7e43; /* как в твоём tailwind.config */
+    --primary-700: #748449;
+  }
+
+  /* базовая кнопка */
+  .btn{
+    display:inline-flex; align-items:center; gap:.5rem;
+    padding:.75rem .75rem; /* px-5 py-3 */
+    border-radius:9999px;   /* rounded-full */
+    font-family:var(--btn-font);
+    font-weight:600;        /* font-semibold */
+    line-height:1;
+    text-decoration:none;
+    transition:background-color .2s ease, box-shadow .2s ease, transform .02s ease;
+    cursor:pointer;
+  }
+  .btn:active{ transform:translateY(1px); }
+
+  /* вариант: зелёная (primary) */
+  .btn-primary{
+    background:var(--primary-600);
+    color:#fff;
+    box-shadow:0 8px 30px rgba(0,0,0,.08); /* твой shadow-soft по смыслу */
+  }
+  .btn-primary:hover{ background:var(--primary-700); }
   </style>
 </head>
 <body class="antialiased text-slate-800">
@@ -50,20 +79,19 @@
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="flex h-16 items-center justify-between">
         <a href="#top" class="flex items-center gap-2 font-semibold text-slate-900">
-          <span class="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-primary-600 text-white">E</span>
-          <span>Экобизнес</span>
+          <span class="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-[#6e7e43] text-white">E</span>
+          <span>EcoBusiness</span>
         </a>
         <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
-          <a href="#apply-form" class="hover:text-primary-600">Подать заявку</a>
-          <a href="#tracks" class="hover:text-primary-600">Номинации</a>
-          <a href="#why" class="hover:text-primary-600">Зачем участвовать</a>
-          <a href="#stages" class="hover:text-primary-600">Этапы</a>
-          <a href="#faq" class="hover:text-primary-600">Вопросы</a>
-          <a href="#winners" class="hover:text-primary-600">Прошлые победители</a>
-          <a href="#contacts" class="hover:text-primary-600">Контакты</a>
+          <a href="#tracks" class="hover:text-[#6e7e43]">Номинации</a>
+          <a href="#why" class="hover:text-[#6e7e43]">Зачем участвовать</a>
+          <a href="#stages" class="hover:text-[#6e7e43]">Этапы</a>
+          <a href="#faq" class="hover:text-[#6e7e43]">Вопросы</a>
+          <a href="#winners" class="hover:text-[#6e7e43]">Прошлые победители</a>
+          <a href="#contacts" class="hover:text-[#6e7e43]">Контакты</a>
         </nav>
         <div class="flex items-center gap-2">
-          <a href="#apply-form" class="hidden sm:inline-flex items-center gap-2 rounded-full bg-primary-600 px-4 py-2 text-white shadow-soft hover:bg-primary-700">Подать заявку</a>
+          <a href="#apply-form" class="btn btn-primary applyBtn">Подать заявку</a>
           <button id="menuBtn" class="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200"><span class="sr-only">Меню</span>☰</button>
         </div>
       </div>
@@ -71,7 +99,6 @@
     <!-- Mobile menu -->
     <div id="mobileMenu" class="md:hidden hidden border-t border-slate-200 bg-white">
       <div class="mx-auto max-w-7xl px-4 py-3 grid grid-cols-2 gap-3 text-sm">
-        <a href="#apply-form" class="py-2 w-full text-left">Подать заявку</a>
         <a href="#tracks" class="py-2">Номинации</a>
         <a href="#why" class="py-2">Зачем участвовать</a>
         <a href="#stages" class="py-2">Этапы</a>
@@ -88,26 +115,24 @@
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-28">
       <div class="grid lg:grid-cols-2 gap-10 items-center">
         <div>
-          <h1 class="text-3xl sm:text-5xl/tight font-extrabold text-slate-900">Премия Экобизнес: Зеленые решения года</h1>
-          <p class="mt-4 text-lg text-slate-600">«Премия Экобизнес: Зеленые решения года — платформа для компаний, внедряющих реальные экологические решения, учитывающие людей и планету. Мы отмечаем лучшие кейсы и помогаем масштабировать устойчивый бизнес».
-          Наша премия в сфере экологии проводится уже 5 лет — за это время она стала ключевой платформой для выявления и поддержки экологических инициатив. Ежегодно конкурс открывает новые проекты в областях сохранения биоразнообразия, устойчивой энергетики, управления отходами и очистки воды и воздуха. За пять сезонов лауреаты внедрили практические решения в муниципалитетах и бизнесе, снизив выбросы и объёмы отходов, а также повысив эффективность природопользования
+          <h1 class="text-3xl sm:text-5xl/tight font-extrabold text-slate-900">Премия EcoBusiness: Зеленые решения года</h1>
+          <p class="mt-4 text-lg text-slate-600 whitespace-pre-line">За 5 лет существования платформа EcoBusiness стала ключевой платформой для выявления и поддержки экологических инициатив.
+            Ежегодно конкурс открывает новые проекты в областях сохранения биоразнообразия, устойчивой энергетики, обращения с отходами, очистки воды и воздуха.
+            За пять сезонов лауреаты внедрили практические решения в муниципалитетах и бизнесе, снизив выбросы и объёмы отходов, а также повысив эффективность природопользования.
           </p>
           <div class="mt-6 flex flex-wrap gap-3">
-            <a href="#apply-form" class="inline-flex items-center gap-2 rounded-full bg-primary-600 px-5 py-3 text-white shadow-soft hover:bg-primary-700">Подать заявку</a>
+            <a href="#apply-form" class="btn btn-primary applyBtn">Подать заявку</a>
             <a href="#why" class="inline-flex items-center gap-2 rounded-full border border-slate-300 px-5 py-3 hover:border-slate-400">Подробнее</a>
           </div>
         </div>
         <div class="relative">
-          <div class="aspect-[4/3] w-full rounded-3xl bg-white p-2 shadow-soft">
-            <div class="h-full w-full rounded-2xl img-skeleton">
-              <img src="assets/img/hero.jpg" alt="Главное изображение" class="h-full w-full rounded-2xl object-cover">
-            </div>
-          </div>
-          <div class="absolute -bottom-6 -left-6 hidden sm:block rounded-2xl bg-white p-3 shadow-soft">
-            <div class="h-24 w-40 rounded-xl img-skeleton">
-              <img src="assets/img/hero.jpg" alt="Описывающий текст" class="h-full w-full rounded-2xl object-cover">
-            </div>
-          </div>
+  <div class="aspect-square w-full rounded-[140px] overflow-hidden
+              ring-8 ring-white/90 shadow-[0_12px_40px_rgba(0,0,0,0.14)]">
+    <img src="assets/img/main.png" alt="Главное изображение"
+         class="block w-full h-full object-cover object-center">
+  </div>
+</div>
+          
         </div>
       </div>
     </div>
@@ -115,24 +140,57 @@
 
   <!-- Номинации -->
   <section id="tracks" class="py-16 sm:py-24">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl sm:text-3xl font-bold">Номинации</h2>
-      <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <article class="rounded-3xl border border-slate-200 p-6 lg:p-8 bg-white shadow-soft">
-          <h3 class="text-xl font-semibold">Технология года в экологической инженерии</h3>
-          <p class="mt-3 text-slate-600">Номинация для команд и компаний, превращающих инженерную мысль в реальный вклад в природу.</p>
-        </article>
-        <article class="rounded-3xl border border-slate-200 p-6 lg:p-8 bg-white shadow-soft">
-          <h3 class="text-xl font-semibold">Зеленый бизнес-прорыв</h3>
-          <p class="mt-3 text-slate-600">Номинация для компаний и стартапов, где устойчивость — не тренд, а стратегия. В фокусе — циркулярные модели, экологичный дизайн и прозрачные цепочки поставок, доказавшие сокращение экологического следа при коммерчески жизнеспособной модели.</p>
-        </article>
-        <article class="rounded-3xl border border-slate-200 p-6 lg:p-8 bg-white shadow-soft">
-          <h3 class="text-xl font-semibold">Экологический вклад общества</h3>
-          <p class="mt-3 text-slate-600">Номинация для инициатив, которые пробуждают заботу о природе и восстанавливают экосистемы через вовлечение людей: образовательные программы, волонтёрские акции и просветительские кампании.</p>
-        </article>
-      </div>
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <h2 class="text-2xl sm:text-3xl font-bold">Номинации</h2>
+
+    <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- 1 -->
+      <article class="rounded-3xl border border-slate-200 p-6 lg:p-8 bg-white shadow-soft">
+        <img
+          src="assets/img/nom-1.png"
+          alt="Технология года в экологической инженерии"
+          class="mx-auto mb-4 h-[120px] w-[120px] object-contain"
+          width="120" height="120"
+        />
+        <h3 class="text-xl font-semibold">Технология года в экологической инженерии</h3>
+        <p class="mt-3 text-slate-600">
+          Номинация для команд и компаний, превращающих инженерную мысль в реальный вклад в природу.
+        </p>
+      </article>
+
+      <!-- 2 -->
+      <article class="rounded-3xl border border-slate-200 p-6 lg:p-8 bg-white shadow-soft">
+        <img
+          src="assets/img/nom-2.png"
+          alt="Зеленый бизнес-прорыв"
+          class="mx-auto mb-4 h-[120px] w-[120px] object-contain"
+          width="120" height="120"
+        />
+        <h3 class="text-xl font-semibold">Зеленый бизнес-прорыв</h3>
+        <p class="mt-3 text-slate-600">
+          Номинация для компаний и стартапов, где устойчивость — не тренд, а стратегия. В фокусе — циркулярные модели, экологичный дизайн и прозрачные цепочки поставок, доказавшие сокращение экологического следа при коммерчески жизнеспособной модели.
+        </p>
+      </article>
+
+      <!-- 3 -->
+      <article class="rounded-3xl border border-slate-200 p-6 lg:p-8 bg-white shadow-soft">
+        <img
+          src="assets/img/nom-3.png"
+          alt="Экологический вклад общества"
+          class="mx-auto mb-4 h-[120px] w-[120px] object-contain"
+          width="120" height="120"
+        />
+        <h3 class="text-xl font-semibold">Экологический вклад общества</h3>
+        <p class="mt-3 text-slate-600">
+          Номинация для инициатив, которые пробуждают заботу о природе и восстанавливают экосистемы через вовлечение людей: образовательные программы, волонтёрские акции и просветительские кампании.
+        </p>
+      </article>
     </div>
-  </section>
+  </div>
+</section>
+
+
+
 
   <!-- Зачем участвовать -->
   <section id="why" class="py-16 sm:py-24 bg-slate-50">
@@ -140,22 +198,22 @@
       <h2 class="text-2xl sm:text-3xl font-bold">Зачем участвовать</h2>
       <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <div class="rounded-3xl bg-white p-6 shadow-soft">
-          <div class="text-3xl">🧭</div>
+        
           <h3 class="mt-3 font-semibold">Очные мероприятия</h3>
           <p class="mt-2 text-slate-600">Выступления, форумы и нетворкинг для активных участников.</p>
         </div>
         <div class="rounded-3xl bg-white p-6 shadow-soft">
-          <div class="text-3xl">💶</div>
+         
           <h3 class="mt-3 font-semibold">Грантовая поддержка</h3>
           <p class="mt-2 text-slate-600">Денежные призы и ресурсная поддержка в ряде номинаций.</p>
         </div>
         <div class="rounded-3xl bg-white p-6 shadow-soft">
-          <div class="text-3xl">📣</div>
+        
           <h3 class="mt-3 font-semibold">PR и узнаваемость</h3>
           <p class="mt-2 text-сlate-600">Публикации о лучших проектах в медиа и соцсетях.</p>
         </div>
         <div class="rounded-3xl bg-white p-6 shadow-soft">
-          <div class="text-3xl">🌱</div>
+       
           <h3 class="mt-3 font-semibold">Сообщество</h3>
           <p class="mt-2 text-сlate-600">Интеграция в экосообщество и продолжение поддержки.</p>
         </div>
@@ -175,7 +233,7 @@
               <div class="font-semibold">Подача заявок — рассказ о проекте, данные и материалы</div>
             </li>
             <li class="rounded-2xl border border-slate-200 p-4">
-              <div class="text-sm text-slate-500">июнь- июль</div>
+              <div class="text-sm text-slate-500">июнь — июль</div>
               <div class="font-semibold">Экспертный отбор — оценка жюри по объективным критериям</div>
             </li>
             <li class="rounded-2xl border border-slate-200 p-4">
@@ -188,13 +246,19 @@
             </li>
           </ol>
         </div>
-        <div class="lg:pl-10">
-          <div class="aspect-[4/3] w-full rounded-3xl bg-white p-2 shadow-soft">
-            <div class="h-full w-full rounded-2xl img-skeleton">
-              <img src="assets/img/hero.jpg" alt="Описывающий текст" class="h-full w-full rounded-2xl object-cover">
-            </div>
-          </div>
-        </div>
+     <div class="lg:pl-10">
+  <div class="flex justify-center">
+    <!-- РАЗМЕР КАРТИНКИ УПРАВЛЯЕТСЯ max-w-* ниже -->
+    <div class="w-full max-w-[320px] sm:max-w-[360px] lg:max-w-[400px]">
+      <div class="aspect-square rounded-[140px] overflow-hidden mx-auto">
+        <img src="assets/img/tracker.png" alt="Главное изображение"
+             class="block w-full h-full object-cover object-center">
+      </div>
+    </div>
+  </div>
+</div>
+
+
       </div>
     </div>
   </section>
@@ -206,35 +270,117 @@
       <div class="mt-8 space-y-3">
         <div class="accordion rounded-2xl bg-white p-4 shadow-soft">
           <button class="accordion-btn w-full text-left">
-            <div class="flex items-center justify-between">
-              <span class="font-semibold">Кто может участвовать?</span>
-              <span>▾</span>
-            </div>
-          </button>
+  <div class="flex items-center justify-between">
+    <span class="font-semibold">Кто может подать заявку на участие в Премии?</span>
+    <!-- chevron -->
+    <svg class="chev h-5 w-5 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+      <path d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.24a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08z"/>
+    </svg>
+  </div>
+</button>
           <div class="accordion-content">
-            <div class="pt-3 text-slate-600">Физические и юридические лица, региональные и муниципальные команды — подробные критерии определяются положением премии.</div>
+            <div class="pt-3 text-slate-600">В конкурсе могут принять участие инициативные граждане, некоммерческие организации, социальные предприятия, стартапы, муниципальные проекты и коммерческие компании.</div>
           </div>
         </div>
         <div class="accordion rounded-2xl bg-white p-4 shadow-soft">
           <button class="accordion-btn w-full text-left">
-            <div class="flex items-center justify-between">
-              <span class="font-semibold">Что дает участие?</span>
-              <span>▾</span>
-            </div>
-          </button>
+  <div class="flex items-center justify-between">
+    <span class="font-semibold">Что даёт участие?</span>
+    <!-- chevron -->
+    <svg class="chev h-5 w-5 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+      <path d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.24a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08z"/>
+    </svg>
+  </div>
+</button>
           <div class="accordion-content">
-            <div class="pt-3 text-slate-600">Экспертиза проектов, обратная связь, обмен опытом и шанс заявить о себе широкой аудитории.</div>
+            <div class="pt-3 text-slate-600">Участие открывает возможности для медийной видимости, получения грантов и инвестиций, налаживания партнёрств, доступа к менторам и экспертам, обучающих программ и практической поддержки при масштабировании инициативы.
+</div>
           </div>
         </div>
         <div class="accordion rounded-2xl bg-white p-4 shadow-soft">
           <button class="accordion-btn w-full text-left">
-            <div class="flex items-center justify-between">
-              <span class="font-semibold">Как проходит отбор?</span>
-              <span>▾</span>
-            </div>
-          </button>
+  <div class="flex items-center justify-between">
+    <span class="font-semibold">На каком этапе должен находиться проект?</span>
+    <!-- chevron -->
+    <svg class="chev h-5 w-5 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+      <path d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.24a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08z"/>
+    </svg>
+  </div>
+</button>
           <div class="accordion-content">
-            <div class="pt-3 text-slate-600">После заявочной кампании формируется шорт-лист, затем жюри оценивает проекты по утвержденным критериям.</div>
+            <div class="pt-3 text-slate-600">Мы приветствуем самые разные инициативы! Вы можете подать заявку как на уже реализованный проект с доказанными результатами, так и на текущий или даже стартап на стадии запуска. Главное – четко описать его цель, механизм работы и тот позитивный экологический и/или социальный эффект, который он принесет или уже приносит.</div>
+          </div>
+        </div>
+        <div class="accordion rounded-2xl bg-white p-4 shadow-soft">
+          <button class="accordion-btn w-full text-left">
+  <div class="flex items-center justify-between">
+    <span class="font-semibold">По каким конкретно критериям будет оцениваться проект?</span>
+    <!-- chevron -->
+    <svg class="chev h-5 w-5 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+      <path d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.24a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08z"/>
+    </svg>
+  </div>
+</button>
+          <div class="accordion-content">
+            <div class="pt-3 text-slate-600">
+              <ul class="list-disc list-inside marker:text-slate-400 space-y-2 mt-3">
+               <li>Потенциальный или фактический экологический эффект: Какие проблемы решает проект и насколько значим его вклад (даже если в перспективе).</li>
+               <li>Инновационность и уникальность: Применение новых подходов, технологий или бизнес-моделей.</li>
+               <li>Масштабируемость и устойчивость: Потенциал для тиражирования в других регионах/отраслях и долгосрочная жизнеспособность.</li>
+                <li>Социальное влияние: Вовлечение людей, создание сообществ.</li>
+              </ul>
+</div>
+          </div>
+        </div>
+        <div class="accordion rounded-2xl bg-white p-4 shadow-soft">
+          <button class="accordion-btn w-full text-left">
+  <div class="flex items-center justify-between">
+    <span class="font-semibold">Как проходит процесс оценки?</span>
+    <!-- chevron -->
+    <svg class="chev h-5 w-5 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+      <path d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.24a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08z"/>
+    </svg>
+  </div>
+</button>
+          <div class="accordion-content">
+            <div class="pt-3 text-slate-600 whitespace-pre-line">Оценка проходит в два этапа:
+1. Экспертная оценка: Жюри изучает все заявки и формирует шорт-лист лучших проектов в каждой номинации.
+2. Народное голосование: Шорт-лист публикуется на нашем сайте, и мы открываем голосование, где каждый может поддержать понравившийся проект. Победитель в каждой номинации определяется по итогам народного голосования.
+</div>
+          </div>
+        </div>
+        <div class="accordion rounded-2xl bg-white p-4 shadow-soft">
+          <button class="accordion-btn w-full text-left">
+  <div class="flex items-center justify-between">
+    <span class="font-semibold">Будет ли очная защита проектов?</span>
+    <!-- chevron -->
+    <svg class="chev h-5 w-5 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+      <path d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.24a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08z"/>
+    </svg>
+  </div>
+</button>
+          <div class="accordion-content">
+            <div class="pt-3 text-slate-600">Нет, очных защит проектов перед жюри не предусмотрено. Решение о шорт-листе принимается на основе поданных заявок, а победитель определяется открытым голосованием.</div>
+          </div>
+        </div>
+        <div class="accordion rounded-2xl bg-white p-4 shadow-soft">
+          <button class="accordion-btn w-full text-left">
+  <div class="flex items-center justify-between">
+    <span class="font-semibold">Что получают победители?</span>
+    <!-- chevron -->
+    <svg class="chev h-5 w-5 transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+      <path d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 10.94l3.71-3.71a.75.75 0 1 1 1.06 1.06l-4.24 4.24a.75.75 0 0 1-1.06 0L5.21 8.29a.75.75 0 0 1 .02-1.08z"/>
+    </svg>
+  </div>
+</button>
+          <div class="accordion-content">
+            <div class="pt-3 text-slate-600">Главный приз – это общественное и профессиональное признание. Победители и финалисты получат:
+              <ul class="list-disc list-inside marker:text-slate-400 space-y-2 mt-3">
+               <li>Официальный диплом лауреата/финалиста Премии.</li>
+               <li>Мощную информационную и медийную поддержку: Публикация вашего кейса на нашем сайте, в СМИ и социальных сетях. Освещение в партнерских изданиях.</li>
+               <li>Нетворкинг: Доступ к сообществу лидеров устойчивого развития, инвесторам и потенциальным партнерам.</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -322,7 +468,7 @@
         </div>
 
         <div class="flex gap-3">
-          <button id="bigApplySubmit" type="submit" class="inline-flex items-center gap-2 rounded-full bg-primary-600 px-5 py-3 text-white shadow-soft hover:bg-primary-700">Отправить заявку</button>
+          <button id="bigApplySubmit" type="submit" class="btn btn-primary applyBtn">Отправить заявку</button>
           <a href="#top" class="inline-flex items-center gap-2 rounded-full border border-slate-300 px-5 py-3 hover:border-slate-400">Отмена</a>
         </div>
       </form>
@@ -337,23 +483,18 @@
           <h2 class="text-2xl sm:text-3xl font-bold">Контакты</h2>
           <p class="mt-2 text-slate-300">По вопросам участия и партнёрства.</p>
           <div class="mt-6 space-y-2">
-            <a href="mailto:contact@example.com" class="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 hover:bg-white/15">award@eco-business.ru</a>
+            <a href="mailto:award@eco-business.ru" class="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 hover:bg-white/15">award@eco-business.ru</a>
              <div class="text-sm text-slate-400">Телеграм • ВКонтакте • Почта</div>
           </div>
+          <div class="mt-10 border-t border-white/10 pt-6 text-sm text-slate-400">© 2025 EcoBusiness</div>
         </div>
-        <div class="rounded-3xl bg-white/5 p-2">
-          <div class="h-72 w-full rounded-2xl img-skeleton">
-            <img src="assets/img/hero.jpg" alt="Главное изображение" class="h-full w-full rounded-2xl object-cover">
-          </div>
-        </div>
-      </div>
-      <div class="mt-10 border-t border-white/10 pt-6 text-sm text-slate-400">© 2025 Экобизнесс</div>
+      
     </div>
   </section>
 
   <!-- Плавающая кнопка -->
   <div id="apply" class="fixed bottom-5 right-5">
-    <a href="#apply-form" class="inline-flex items-center gap-2 rounded-full bg-primary-600 px-5 py-3 text-white shadow-soft hover:bg-primary-700">Оставить заявку</a>
+    <a href="#apply-form" class="btn btn-primary applyBtn">Оставить заявку</a>
   </div>
 
   <script>
@@ -440,19 +581,19 @@
     cat: 'Технология года в экологической инженерии',
     org: 'ООО «Экоград»',
     project: 'Технология утилизации грунта V класса опасности на объекте строительства.',
-    img: 'assets/img/hero.jpg'
+    img: 'assets/winners/25-1.png'
   },
   { 
     cat: 'Зеленый бизнес-прорыв',
     org: 'ООО «НПП «ТЕХНОПРИБОР»',
     project: 'Разработка промышленных портативных многоканальных анализаторов «Лидер-600».',
-    img: 'assets/img/hero.jpg'
+    img: 'assets/winners/25-2.png'
   },
   { 
     cat: 'Экологический вклад общества',
     org: 'Областной технолицей им. В. И. Долгих (Московская область)',
     project: 'Комплекс экопросветительских мероприятий.',
-    img: 'assets/img/hero.jpg'
+    img: 'assets/winners/25-3.jpg'
   },
 ],
 
@@ -461,20 +602,20 @@
     cat: 'Технология года в экологической инженерии',
     org: 'ООО «Западно-Сибирский электрометаллургический завод»',
     project: 'Проект по безотходному производству ферросплавов.',
-    img: 'assets/img/hero.jpg'
+    img: 'assets/winners/24-1.png'
 
   },
   { 
     cat: 'Зеленый бизнес-прорыв',
     org: 'ООО «ТКО-Информ»',
     project: 'Автоматизированная информационная система «Отходы».',
-    img: 'assets/img/hero.jpg'
+    img: 'assets/winners/24-2.png'
   },
   { 
     cat: 'Экологический вклад общества',
     org: 'Департамент транспорта и развития дорожно-транспортной инфраструктуры города Москвы',
     project: 'Проект «Энергия Москвы».',
-    img: 'assets/img/hero.jpg'
+    img: 'assets/winners/24-3.jpg'
   },
 ],
       2023: [
@@ -482,19 +623,19 @@
       cat: 'Технология года в экологической инженерии',
       org: 'ПАО «ЛУКОЙЛ»',
       project: 'Проект по экологически чистому СО2 нейтральному промышленному пиролизу углеводородного газа в ООО «РИТЭК» с получением водорода и углеродных нано-трубок, а также проект по модернизации Малой ГЭС на реке Бешенка (пгт. Красная Поляна, 1,5 МВт) ООО «ЛУКОЙЛ-Экоэнерго».',
-      img: 'assets/img/hero.jpg'
+      img: 'assets/winners/23-1.jpg'
     },
     { 
     cat: 'Зеленый бизнес-прорыв',
     org: 'Северо-Западная региональная дирекция железнодорожных вокзалов (филиал ОАО «РЖД»)',
     project: 'Проект по установке фандоматов для сбора вторсырья на железнодорожных вокзалах.',
-    img: 'assets/img/hero.jpg'
+    img: 'assets/winners/20-2.jpg'
   },
   { 
     cat: 'Экологический вклад общества',
     org: 'Проект «Водорослям крышка!»',
     project: 'Инициатива вовлекает население в раздельный сбор отходов и помощь экосистеме реки Волги.',
-    img: 'assets/img/hero.jpg'
+    img: 'assets/winners/23-3.jpeg'
   },
 ],
 
@@ -503,19 +644,19 @@
           cat: 'Технология года в экологической инженерии', 
           org: 'ПАО «Магнитогорский металлургический комбинат»', 
           project: 'Проект «Сокращение вредных выбросов ПАО «ММК» в атмосферу»', 
-          img: 'assets/img/hero.jpg' 
+          img: 'assets/winners/22-1.jpg' 
         },
         { 
           cat: 'Зеленый бизнес-прорыв', 
           org: 'АО «Краслесинвест»', 
           project: 'Проект завода по производству топливных гранул', 
-          img: 'assets/img/hero.jpg' 
+          img: 'assets/winners/22-2.png' 
         },
         { 
           cat: 'Экологический вклад общества', 
           org: 'АО «ВкусВилл»', 
           project: 'Проект: сбор пакетов, крышек и вторсырья с доставкой', 
-          img: 'assets/img/hero.jpg' 
+          img: 'assets/winners/22-3.jpg' 
         },
       ],
       2021: [
@@ -523,19 +664,19 @@
           cat: 'Технология года в экологической инженерии', 
           org: 'АО «Русский хром 1915»', 
           project: '«За технологию очистки хромсодержащих сточных вод с отделением осадка на декантерных центрифугах»', 
-          img: 'assets/img/hero.jpg' 
+          img: 'assets/winners/21-1.jpg' 
         },
         { 
           cat: 'Зеленый бизнес-прорыв', 
           org: 'АО «Волжский трубный завод»', 
           project: 'За проект «Внедрение принципов ESG в системе экоменеджмента предприятия»', 
-          img: 'assets/img/hero.jpg' 
+          img: 'assets/winners/21-2.jpg' 
         },
         { 
           cat: 'Экологический вклад общества', 
           org: 'Общество добровольных лесных пожарных, Юлия Файзрахманова и инициативная группа «Защита Казанки на Гаврилова»', 
           project: 'Общественный экологический проект «ДЫШИ!Омск»', 
-          img: 'assets/img/hero.jpg' 
+          img: 'assets/winners/21-3.jpg' 
         },
       ],
       2020: [
@@ -543,19 +684,19 @@
           cat: 'Технология года в экологической инженерии', 
           org: 'АО «Сибирский НИК и ПИ алюминиевой и электродной промышленности»', 
           project: '«Создание импортозамещающей экологически и энергетически эффективной конструкции «сухой» очистки отходящих газов при производстве алюминия»', 
-          img: 'assets/img/hero.jpg' 
+          img: 'assets/winners/20-1.jpg' 
         },
         { 
           cat: 'Зеленый бизнес-прорыв', 
           org: 'ОАО «РЖД»', 
           project: 'Проект «Моторвагонное депо станции Подмосковная»', 
-          img: 'assets/img/hero.jpg' 
+          img: 'assets/winners/20-2.jpg' 
         },
         { 
           cat: 'Экологический вклад общества', 
           org: 'Травин Алексей Анатольевич (ИП)', 
           project: 'Проект «Экопад (Ecopad)»', 
-          img: 'assets/img/hero.jpg' 
+          img: 'assets/winners/20-3.png' 
         },
       ],
     };
@@ -570,21 +711,35 @@
 
     let yearIdx = 5; // стартуем с 2025
 
-    function cardTpl(item){
-      const img = item.img && item.img !== '' ? item.img : '';
-      return `
-        <article class="rounded-3xl bg-white shadow-soft overflow-hidden border border-slate-200">
-          <div class="aspect-video w-full ${img ? '' : 'img-skeleton'}">
-            ${img ? `<img src="${img}" alt="${item.cat}" class="h-full w-full object-cover">` : ''}
-          </div>
-          <div class="p-4">
-            <div class="mt-1 text-slate-500">${item.cat}</div>
-            <h3 class="mt-1 font-semibold">${item.org}</h3>
-            <p class="mt-1 text-sm text-slate-600">${item.project}</p>
-          </div>
-        </article>
-      `;
-    }
+    // item.fit: 'contain' | 'cover' (необязательно). По умолчанию "contain" — безопасно для логотипов.
+function cardTpl(item){
+  const img = item.img && item.img !== '' ? item.img : '';
+
+  const media = img
+    ? `
+      <div class="w-full bg-white h-[200px] sm:h-[220px] lg:h-[240px]
+                  flex items-center justify-center overflow-hidden p-4 sm:p-6">
+        <img src="${img}" alt="${item.cat}"
+             class="block object-contain object-center max-h-full max-w-full" />
+      </div>
+    `
+    : `<div class="w-full h-[200px] sm:h-[220px] lg:h-[240px] img-skeleton"></div>`;
+
+  return `
+    <article class="rounded-3xl bg-white shadow-soft overflow-hidden border border-slate-200">
+      ${media}
+      <div class="p-4">
+        <div class="mt-1 text-slate-500">${item.cat}</div>
+        <h3 class="mt-1 font-semibold">${item.org}</h3>
+        <p class="mt-1 text-sm text-slate-600">${item.project}</p>
+      </div>
+    </article>
+  `;
+}
+
+
+
+
 
     function renderYear(){
       const year = YEARS[yearIdx];
