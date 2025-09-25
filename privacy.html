@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="ru" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="assets/icons/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16.png">
+  <title>Политика конфиденциальности — EcoBusiness</title>
+  <meta name="description" content="Политика конфиденциальности платформы EcoBusiness." />
+
+  <!-- Tailwind (как на главной) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50:'#edfff7',100:'#d6ffef',200:'#a8f7d5',300:'#77e9bc',
+              400:'#42d49e',500:'#18b780',600:'#6e7e43',700:'#748449',
+              800:'#0e6048',900:'#0f4e3c'
+            }
+          },
+          fontFamily: {
+            sans: ["Inter","system-ui","-apple-system","Segoe UI","Roboto","Ubuntu","Cantarell","Noto Sans","Helvetica Neue","Arial","sans-serif"],
+          },
+          boxShadow: { soft: '0 8px 30px rgba(0,0,0,0.08)' }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    #header.scrolled { background: rgba(255,255,255,0.9); box-shadow: 0 8px 30px rgba(0,0,0,.08); backdrop-filter: blur(8px); }
+    :root{ --btn-font:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif; --primary-600:#6e7e43; --primary-700:#748449; }
+    .btn{ display:inline-flex; align-items:center; gap:.5rem; padding:.75rem .75rem; border-radius:9999px; font-family:var(--btn-font); font-weight:600; line-height:1; text-decoration:none; transition:background-color .2s ease, box-shadow .2s ease, transform .02s ease; cursor:pointer;}
+    .btn:active{ transform:translateY(1px); }
+    .btn-primary{ background:var(--primary-600); color:#fff; box-shadow:0 8px 30px rgba(0,0,0,.08); }
+    .btn-primary:hover{ background:var(--primary-700); }
+  </style>
+</head>
+<body class="antialiased text-slate-800">
+
+  <!-- Header (ссылки ведут на главную) -->
+  <header id="header" class="sticky top-0 z-40 transition-all">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <a href="index.html#top" class="flex items-center gap-2 font-semibold text-slate-900">
+          <span class="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-[#6e7e43] text-white">E</span>
+          <span>EcoBusiness</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+          <a href="index.html#apply-form" class="hover:text-primary-600">Подать заявку</a>
+          <a href="index.html#tracks" class="hover:text-primary-600">Номинации</a>
+          <a href="index.html#why" class="hover:text-primary-600">Зачем участвовать</a>
+          <a href="index.html#stages" class="hover:text-primary-600">Этапы</a>
+          <a href="index.html#faq" class="hover:text-primary-600">Вопросы</a>
+          <a href="index.html#winners" class="hover:text-primary-600">Победители</a>
+          <a href="index.html#contacts" class="hover:text-primary-600">Контакты</a>
+        </nav>
+        <div class="flex items-center gap-2">
+          <a href="index.html#apply-form" class="btn btn-primary">На главную / Заявка</a>
+          <button id="menuBtn" class="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200"><span class="sr-only">Меню</span>☰</button>
+        </div>
+      </div>
+    </div>
+    <div id="mobileMenu" class="md:hidden hidden border-t border-slate-200 bg-white">
+      <div class="mx-auto max-w-7xl px-4 py-3 grid grid-cols-2 gap-3 text-sm">
+        <a href="index.html#apply-form" class="btn btn-primary">Подать заявку</a>
+        <a href="index.html#tracks" class="py-2">Номинации</a>
+        <a href="index.html#why" class="py-2">Зачем участвовать</a>
+        <a href="index.html#stages" class="py-2">Этапы</a>
+        <a href="index.html#faq" class="py-2">Вопросы</a>
+        <a href="index.html#winners" class="py-2">Победители</a>
+        <a href="index.html#contacts" class="py-2">Контакты</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Content -->
+  <main>
+    <section class="py-16 sm:py-24 bg-slate-50">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <h1 class="text-3xl sm:text-4xl font-extrabold">Политика конфиденциальности</h1>
+        <p class="mt-2 text-slate-500 text-sm">Обновлено: 01.01.2025</p>
+
+        <div class="mt-8 space-y-8">
+          <section>
+            <h2 class="text-xl font-semibold">1. Общие положения</h2>
+            <p class="mt-2 text-slate-700">
+              Настоящая Политика определяет порядок обработки и защиты персональных данных пользователей
+              платформы EcoBusiness. Используя сайт, вы соглашаетесь с условиями данной Политики.
+            </p>
+          </section>
+
+          <section>
+            <h2 class="text-xl font-semibold">2. Какие данные мы собираем</h2>
+            <ul class="mt-2 list-disc list-inside text-slate-700 space-y-1">
+              <li>Контактные данные: имя, e-mail, телефон, организация.</li>
+              <li>Данные заявки: описание проекта, ссылки, файлы и иные материалы.</li>
+              <li>Технические данные: cookie, IP-адрес, сведения об устройстве и браузере.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-xl font-semibold">3. Цели обработки</h2>
+            <ul class="mt-2 list-disc list-inside text-slate-700 space-y-1">
+              <li>Приём и рассмотрение заявок, коммуникация с участниками.</li>
+              <li>Проведение конкурса и публикация результатов (с согласия заявителя).</li>
+              <li>Улучшение работы сайта и аналитика посещаемости.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-xl font-semibold">4. Правовые основания</h2>
+            <p class="mt-2 text-slate-700">
+              Обработка данных осуществляется на основании согласия субъекта данных и/или
+              заключения и исполнения договора (пользовательского соглашения).
+            </p>
+          </section>
+
+          <section>
+            <h2 class="text-xl font-semibold">5. Передача третьим лицам</h2>
+            <p class="mt-2 text-slate-700">
+              Мы не передаём персональные данные третьим лицам, за исключением случаев, предусмотренных законом,
+              а также привлечения подрядчиков для обработки данных по нашему поручению при соблюдении режима конфиденциальности.
+            </p>
+          </section>
+
+          <section>
+            <h2 class="text-xl font-semibold">6. Сроки хранения</h2>
+            <p class="mt-2 text-slate-700">Данные хранятся не дольше, чем это требуется для целей обработки либо предусмотрено законом.</p>
+          </section>
+
+          <section>
+            <h2 class="text-xl font-semibold">7. Права пользователя</h2>
+            <ul class="mt-2 list-disc list-inside text-slate-700 space-y-1">
+              <li>Получение информации об обработке своих данных;</li>
+              <li>Исправление, ограничение, удаление данных;</li>
+              <li>Отзыв согласия на обработку.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="text-xl font-semibold">8. Контакты оператора</h2>
+            <p class="mt-2 text-slate-700">
+              По вопросам обработки персональных данных обращайтесь:
+              <a href="mailto:award@eco-business.ru" class="text-[#6e7e43] hover:underline">award@eco-business.ru</a>.
+            </p>
+          </section>
+        </div>
+
+        <div class="mt-10">
+          <a href="index.html#apply-form" class="btn btn-primary">Вернуться к заявке</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-300">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+      <div class="flex items-center justify-between text-sm">
+        <span>© 2019-2025 EcoBusiness</span>
+        <a href="mailto:award@eco-business.ru" class="hover:underline">award@eco-business.ru</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // header bg on scroll
+    const header = document.getElementById('header');
+    const onScroll = () => {
+      if (window.scrollY > 8) header.classList.add('scrolled');
+      else header.classList.remove('scrolled');
+    };
+    document.addEventListener('scroll', onScroll);
+
+    // mobile menu
+    document.getElementById('menuBtn')?.addEventListener('click', () => {
+      document.getElementById('mobileMenu')?.classList.toggle('hidden');
+    });
+  </script>
+</body>
+</html>
