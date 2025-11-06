@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="ru" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="assets/icons/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16.png">
+  <title>Новости — EcoBusiness</title>
+  <meta name="description" content="Новости EcoBusiness" />
+  <!-- Tailwind CDN для прототипа -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#edfff7', 100: '#d6ffef', 200: '#a8f7d5', 300: '#77e9bc',
+              400: '#42d49e', 500: '#18b780', 600: '#0a996b', 700: '#0b7b58',
+              800: '#0e6048', 900: '#0f4e3c'
+            }
+          },
+          fontFamily: {
+            sans: ["Inter","system-ui","-apple-system","Segoe UI","Roboto","Ubuntu","Cantarell","Noto Sans","Helvetica Neue","Arial","sans-serif"],
+          },
+          boxShadow: { soft: '0 8px 30px rgba(0,0,0,0.08)' }
+        }
+      }
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --btn-font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+      --primary-600: #6e7e43;
+      --primary-700: #748449;
+    }
+    .btn{
+      display:inline-flex; align-items:center; gap:.5rem;
+      padding:.75rem .75rem; border-radius:9999px;
+      font-family:var(--btn-font); font-weight:600; line-height:1;
+      text-decoration:none; transition:background-color .2s, box-shadow .2s, transform .02s; cursor:pointer;
+    }
+    .btn:active{ transform:translateY(1px); }
+    .btn-primary{ background:var(--primary-600); color:#fff; box-shadow:0 8px 30px rgba(0,0,0,.08); }
+    .btn-primary:hover{ background:var(--primary-700); }
+    #header.scrolled{ background: rgba(255,255,255,0.9); box-shadow: 0 8px 30px rgba(0,0,0,0.08); backdrop-filter: blur(8px); }
+
+
+
+
+ /* DESKTOP: фото слева 380×260, текст справа */
+.news-card{
+  display:grid;
+  grid-template-columns: 380px 1fr;
+  gap:1.5rem;
+  align-items:center;
+}
+
+/* контейнер фото — фиксированный, со скруглением */
+.news-img{
+  display:block;              /* <a> должен быть блочным */
+  position:relative;
+  width:380px;
+  height:260px;
+  border-radius:1.5rem;
+  overflow:hidden;
+  flex-shrink:0;
+}
+
+/* картинка заполняет контейнер */
+.news-img > img{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+/* длинные заголовки не ломают сетку */
+.news-text{ min-width:0; }
+
+/* MOBILE: карточка в столбик, всё по центру, фото сжимается */
+@media (max-width:1024px){
+  .news-card{
+    grid-template-columns:1fr;
+    justify-items:center;  /* центрирует фото и текст */
+    gap:1rem;
+    align-items:start;
+  }
+
+  .news-img{
+    position:relative;      /* важно для absolute у <img> */
+    width:min(100%, 420px); /* не шире экрана */
+    height:auto;
+    aspect-ratio:4 / 3;     /* задаём высоту от ширины */
+    border-radius:1.5rem;
+    overflow:hidden;
+  }
+
+  .news-img > img{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+  }
+
+  .news-text{
+    text-align:center;
+    width:100%;
+    max-width:680px;
+  }
+  .news-text .mt-6{
+    display:flex; justify-content:center;
+  }
+}
+
+@media (max-width:1024px){
+  /* Новости: убираем лишние боковые паддинги у текста */
+  #news .news-text{
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    padding-top: .75rem;   /* можно чуть меньше сверху */
+    padding-bottom: 0;
+  }
+}
+
+
+
+
+
+  </style>
+</head>
+<body class="antialiased text-slate-800">
+  <!-- Header (как на главной: с мобильным меню и кнопкой) -->
+  <header id="header" class="sticky top-0 z-40 transition-all">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex h-16 items-center justify-between">
+        <a href="index.html" class="flex items-center gap-2 font-semibold text-slate-900">
+          <span class="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-[#6e7e43] text-white">E</span>
+          <span>EcoBusiness</span>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+          <a href="index.html#tracks" class="hover:text-[#6e7e43]">Номинации</a>
+          <a href="index.html#why" class="hover:text-[#6e7e43]">Зачем участвовать</a>
+          <a href="index.html#stages" class="hover:text-[#6e7e43]">Этапы</a>
+          <a href="index.html#faq" class="hover:text-[#6e7e43]">Вопросы</a>
+          <a href="index.html#winners" class="hover:text-[#6e7e43]">Прошлые победители</a>
+          <a href="news.html" class="text-[#6e7e43] font-semibold">Новости</a>
+          <a href="index.html#contacts" class="hover:text-[#6e7e43]">Контакты</a>
+        </nav>
+        <div class="flex items-center gap-2">
+          <a href="index.html#apply-form" class="btn btn-primary applyBtn">Подать заявку</a>
+          <button id="menuBtn" class="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200"><span class="sr-only">Меню</span>☰</button>
+        </div>
+      </div>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="md:hidden hidden border-t border-slate-200 bg-white">
+      <div class="mx-auto max-w-7xl px-4 py-3 grid grid-cols-2 gap-3 text-sm">
+        <a href="index.html#tracks" class="py-2">Номинации</a>
+        <a href="index.html#why" class="py-2">Зачем участвовать</a>
+        <a href="index.html#stages" class="py-2">Этапы</a>
+        <a href="index.html#faq" class="py-2">Вопросы</a>
+        <a href="index.html#winners" class="py-2">Прошлые победители</a>
+        <a href="news.html" class="py-2 font-semibold text-[#6e7e43]">Новости</a>
+        <a href="index.html#contacts" class="py-2">Контакты</a>
+        <a href="index.html#apply-form" class="py-2">Подать заявку</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Лента новостей -->
+  <main class="py-16 sm:py-24">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <h1 class="text-2xl sm:text-3xl font-bold">Новости</h1>
+
+      <div id="newsList" class="mt-8 grid gap-8">
+        <!-- Рендерится скриптом ниже -->
+      </div>
+    </div>
+  </main>
+
+  <!-- Плавающая кнопка -->
+  <div id="apply" class="fixed bottom-5 right-5">
+    <a href="index.html#apply-form" class="btn btn-primary applyBtn">Оставить заявку</a>
+  </div>
+
+  <script>
+    // sticky header bg on scroll — как на главной
+    const header = document.getElementById('header');
+    const onScroll = () => { if (window.scrollY > 8) header.classList.add('scrolled'); else header.classList.remove('scrolled'); };
+    document.addEventListener('scroll', onScroll);
+
+    // mobile menu
+    document.getElementById('menuBtn')?.addEventListener('click', () => {
+      document.getElementById('mobileMenu')?.classList.toggle('hidden');
+    });
+
+    // ДАННЫЕ новостей (те же поля, что использовали на главной)
+    const NEWS = [
+     {
+      title: '70 лет Петербургскому метро',
+      date: '06.11.2025',
+      excerpt: 'В 2025 году Санкт-Петербург отмечает 70-летие метрополитена — одного из символов города. Под руководством Евгения Германовича Козина метро внедряет «зелёные» технологии утилизации и переработки грунтов, снижая нагрузку на окружающую среду.',
+      img: 'assets/news/n1.jpg',
+      url: 'news.html'
+    },
+
+   {
+      title: 'Определены победители EcoBusiness 2025',
+      date: '31.08.2025',
+      excerpt: 'Онлайн-голосование за участников экологической премии завершено. Поддержку получили проекты, направленные на сохранение природы и развитие экологической культуры. Победители определены экспертным жюри и народным голосованием. В ближайшее время состоится торжественная церемония награждения, на которой объявят лучшие экологические инициативы года.',
+      img: 'assets/news/n3.png',
+      url: 'news.html'
+    },
+
+    {
+      title: 'EcoBusiness открыл приём заявок 2025',
+      date: '01.03.2025',
+      excerpt: 'Стартовал новый сезон премии. Команды и компании могут подать проекты в трёх номинациях.',
+      img: 'assets/news/n2.png',
+      url: 'news.html'
+    }
+    ];
+
+    const card = (n) => `
+      <article class="news-card rounded-3xl border border-slate-200 bg-white shadow-soft overflow-hidden">
+        <div class="news-img ring-1 ring-slate-200">
+          <img src="${n.img}" alt="${n.title}">
+        </div>
+        <div class="p-6 flex flex-col justify-center news-text">
+          <h2 class="text-xl sm:text-2xl font-semibold">${n.title}</h2>
+          <div class="mt-1 text-sm text-slate-500">${n.date}</div>
+          <p class="mt-3 text-slate-600">${n.excerpt}</p>
+        </div>
+      </article>
+    `;
+
+    document.getElementById('newsList').innerHTML = NEWS.map(card).join('');
+  </script>
+</body>
+</html>
